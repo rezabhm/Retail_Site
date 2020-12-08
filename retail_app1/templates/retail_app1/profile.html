@@ -1,0 +1,172 @@
+{% extends 'retail_app1/index.html' %}
+
+{% block style %}
+
+    .info {
+
+    position : relative ;
+    right : 33% ;
+
+    }
+
+    .row_second {
+
+    background-color : rgb(200 , 200 , 200);
+
+    }
+
+    td.profile_info  {
+
+    margin : 10px ;
+    border-style: solid ;
+    border-color : rgb(150 , 150 , 150) ;
+    padding : 5px;
+    margin :10px;
+    position : relative;
+
+    }
+
+    .ord_class {
+
+    border-style: solid ;
+    border-color : rgb(150 , 150 , 150) ;
+    padding : 5px;
+    margin :10px;
+    position : relative;
+
+    }
+
+    .profile_info {
+
+    position : relative;
+
+    }
+
+    thead {
+
+    position : relative;
+
+    }
+
+    .Com_table {
+
+    position : relative;
+    right : 16% ;
+
+    }
+
+{% endblock %}
+
+
+{% block main %}
+
+<table class="info">
+
+    <thead style="background-color: rgb(50 , 50 , 50)">
+        <tr>
+            <td style="height: 50px;" ></td>
+            <td style="height: 50px;" ></td>
+        </tr>
+    </thead>
+
+    {% for inf in UserInfo %}
+        <tr class="profile_info">
+            <td class="profile_info">
+                {{ inf.0 }}
+            </td>
+
+            <td class="profile_info">
+                {{ inf.1 }}
+            </td>
+        </tr>
+    {% endfor %}
+
+
+</table>
+
+
+<br>
+
+
+<table class="order_table">
+
+    <thead style="background-color: rgb(50 , 50 , 50)">
+        <tr>
+
+            <td style="height: 50px; color : white; " >شماره سفارش</td>
+            <td style="height: 50px; color : white; " >نام محصول</td>
+            <td style="height: 50px; color : white; " >قیمت برداخت شده برای هر محصول</td>
+            <td style="height: 50px; color : white; " >تعداد سفارش</td>
+            <td style="height: 50px; color : white; " >زمان سفارش (میلادی)</td>
+            <td style="height: 50px; color : white; " >وضعیت ارسال</td>
+
+        </tr>
+
+    </thead>
+
+    {% for ord in UserOrd %}
+
+        <tr>
+
+            <td class="ord_class {{ ord.1 }}">
+                {{ ord.2 }}
+            </td>
+
+            {% for x in ord.0 %}
+
+            <td class="ord_class {{ ord.1 }}">
+                {{ x }}
+            </td>
+
+            {% endfor %}
+        </tr>
+
+    {% endfor %}
+
+
+</table>
+
+
+<br>
+
+
+<table class="order_table Com_table">
+
+    <thead style="background-color: rgb(50 , 50 , 50)">
+        <tr>
+
+            <td style="height: 50px; color : white; " >شماره نظرات</td>
+            <td style="height: 50px; color : white; " >نام محصول</td>
+            <td style="height: 50px; color : white; " >زمان ارسال نظر</td>
+            <td style="height: 50px; color : white; " >متن نظر</td>
+
+        </tr>
+
+    </thead>
+
+    {% for cmnt in UserCom %}
+
+        <tr>
+
+            <td class="ord_class {{ cmnt.1 }}">
+                {{ cmnt.2 }}
+            </td>
+
+            {% for x in cmnt.0 %}
+
+            <td class="ord_class {{ cmnt.1 }}">
+                {{ x }}
+            </td>
+
+            {% endfor %}
+        </tr>
+
+    {% endfor %}
+
+
+</table>
+
+<br>
+
+{% endblock %}
+

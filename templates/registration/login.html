@@ -1,0 +1,158 @@
+{% extends 'retail_app1/index.html' %}
+
+{% block style %}
+
+.fm {
+
+position : relative;
+right : 20%;
+margin : 10px;
+
+}
+
+table.fm {
+
+border-style : solid ;
+border-color : rgb(100 , 100 , 100);
+border-radius : 10px ;
+padding : 20px ;
+background-color : rgb(240 , 240 , 240) ;
+
+}
+
+p.line_table {
+
+background-color : rgb(150 , 150 , 150);
+width : 100% ;
+height : 2px ;
+margin : 10px ;
+
+}
+
+
+.text {
+
+color : rgb(50 , 50  , 50);
+margin : 10px ;
+
+}
+
+
+{% endblock %}
+
+{% block main %}
+
+{% if user.is_authenticated %}
+
+<pre style="color : rgb(0,0,0);" class="fm" >
+
+    شما با کاربر {{ user.username }} به این سایت وارد شده اید
+    در صورتی که مایل به خارج شدن از حساب هستید بر روی دکمه زیر
+    کلیک کنید .
+
+</pre>
+
+<a href="{% url 'logout' %}?next=/home/" class="fm"><input type="submit" value="خروج از حساب"></a>
+
+
+{% else %}
+
+<form method="post" action="{% url 'login' %}" class="fm">
+
+    {% csrf_token %}
+
+    <table class="fm">
+
+        <tr>
+            <td class="text">
+
+                نام کاربری
+
+            </td>
+        </tr>
+
+
+        <tr>
+            <td class="text">
+                <p class="line_table"></p>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td class="text">
+
+            {{ form.username }}
+
+            </td>
+        </tr>
+
+        <tr>
+            <td class="text">
+
+                رمز عبور
+
+            </td>
+        </tr>
+
+        <tr>
+
+            <td class="text">
+                <p class="line_table"></p>
+            </td>
+        </tr>
+
+
+
+        <tr>
+            <td class="text">
+            {{ form.password }}
+            </td>
+
+        </tr>
+                <tr>
+            <td class="text">
+                <input type="submit" value="ورود" >
+            </td>
+        </tr>
+
+        <input type="hidden" name="next" value="{{ next }}">
+
+    </table>
+
+
+</form>
+
+{% endif %}
+
+{% endblock %}
+
+
+{% block user %}
+
+{% if request.user.is_authenticated %}
+
+<p style=" margin : 2px ;position : relative ; right : 85%; display : inline; color : rgb(0,0,0); ">{{ user.username }}</p>
+
+<a href="{% url 'login' %}">
+
+    {% load static %}
+    <img src="{% static 'media/1.jfif' %}" id="profile" >
+
+</a>
+
+{% else %}
+
+<p style=" margin : 2px ;position : relative ; right : 85%; display : inline; color : rgb(0,0,0); ">ورود کاربر / ثبت نام</p>
+
+<a href="{% url 'login' %}">
+
+    {% load static %}
+    <img src="{% static 'media/1.jfif' %}" id="profile" >
+
+</a>
+
+
+{% endif %}
+
+{% endblock %}

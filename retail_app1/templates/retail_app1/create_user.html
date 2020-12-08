@@ -1,0 +1,249 @@
+{% extends 'retail_app1/index.html' %}
+
+{% block style %}
+
+.create {
+
+color: rgb(0,0,0);
+
+}
+
+td.create {
+
+margin : 10px;
+
+}
+
+tr.create {
+
+margin : 50px;
+
+}
+
+table.create {
+
+border-color: rgb(0,0,0);
+border-style : solid;
+border-color : rgb(150 , 150 , 150) ;
+border-width : 1px;
+margin-right : 10% ;
+padding : 5px ;
+
+
+}
+
+.button {
+
+margin : 25px;
+border-radius : 20px;
+background-color : rgb(50 , 50 , 50) ;
+width :150px ;
+height : 50px ;
+color : rgb(255 , 255 , 255);
+
+}
+
+
+#ln_tab {
+
+background-color : rgb(100 , 0 , 0) ;
+width : 100%;
+height : 2px ;
+
+}
+
+{% endblock %}
+
+
+
+{% block main %}
+
+<pre style="color : rgb(255 , 0 , 0)">
+
+    خطا : {{ error }}
+
+</pre>
+
+
+<form method="post" action="/finish/">
+    {% csrf_token %}
+
+    <table class="create">
+
+    <tr>
+        <td class="create" colspan="2">
+            ثبت نام
+        </td>
+
+        <td rowspan="12">
+
+            {% load static %}
+            <img src="{% static 'media/1.jfif' %}" height="400" width="450">
+
+        </td>
+
+    </tr>
+
+    <tr>
+        <td id="line_table" colspan="2">
+            <p id="ln_tab"></p>
+        </td>
+
+    </tr>
+
+    <tr class="create">
+
+        <td class="create">
+            نام کاربری
+
+        </td>
+
+        <td>
+            <input type="text" name="username">
+        </td>
+
+    </tr>
+
+    <tr class="create">
+
+        <td class="create">
+            نام
+
+        </td>
+
+        <td>
+            <input type="text" name="first_name">
+        </td>
+
+    </tr>
+
+    <tr class="create">
+
+        <td class="create">
+            نام خانوادگی
+
+        </td>
+
+        <td>
+            <input type="text" name="last_name">
+        </td>
+
+    </tr>
+
+    <tr>
+
+        <td class="create">
+            آقا
+            <input type="radio" name="sex" value="men">
+
+        </td>
+
+        <td class="create">
+            خانم
+            <input type="radio" name="sex" value="women">
+
+        </td>
+
+    </tr>
+
+    <tr class="create">
+
+        <td class="create">
+            رمز عبور
+
+        </td>
+
+        <td>
+            <input type="password" name="password1">
+        </td>
+
+    </tr>
+
+
+    <tr class="create">
+
+        <td class="create">
+            رمز عبور
+
+        </td>
+
+        <td>
+            <input type="password" name="password2">
+        </td>
+
+    </tr>
+
+
+    <tr class="create">
+
+        <td class="create">
+            ایمیل
+
+        </td>
+
+        <td>
+            <input type="email" name="email">
+        </td>
+
+    </tr>
+
+    <tr class="create">
+
+        <td class="create">
+            شماره موبایل
+        </td>
+
+        <td>
+            <input type="text" name="phone_number">
+        </td>
+
+    </tr>
+
+    <tr class="create">
+
+        <td class="create">
+            آدرس
+
+        </td>
+
+        <td>
+            <input type="text" name="address">
+        </td>
+
+    </tr>
+
+
+
+
+    <tr class="create">
+
+        <td class="create">
+            <input type="submit" value="ثبت نام" class="button">
+
+        </td>
+
+        <td>
+            <input type="reset" value="از نو" class="button">
+        </td>
+
+    </tr>
+
+</table>
+</form>
+
+{% endblock %}
+
+
+
+{% block user %}
+
+<p style=" margin : 2px ;position : relative ; right : 85%; display : inline; color : rgb(0,0,0); ">{{ username }}</p>
+
+<a href="{% url 'login' %}">
+
+    {% load static %}
+    <img src="{% static 'media/1.jfif' %}" id="profile" >
+
+</a>
+
+{% endblock %}

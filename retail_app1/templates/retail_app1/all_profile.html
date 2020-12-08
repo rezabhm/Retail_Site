@@ -1,0 +1,98 @@
+{% extends 'retail_app1/index.html' %}
+
+{% block style %}
+
+    .thead {
+
+    background-color : rgb(50, 50 , 50);
+    margin : 3px ;
+    padding : 10px;
+    color : white ;
+
+    }
+
+    .first_class {
+
+    background-color : white;
+    margin: 5px ;
+    padding : 10px ;
+    border-style : solid;
+    border-color : rgb(100 , 100 , 100) ;
+    border-width : 2px ;
+
+    }
+
+    .second_class {
+
+    background-color : rgb(200 , 200 , 200);
+    margin: 5px ;
+    padding : 3px ;
+
+    }
+
+{% endblock %}
+
+
+{% block main %}
+
+<table>
+
+    <thead>
+        <tr>
+
+            <td class="thead">
+
+            </td>
+
+            <td class="thead">
+                نام کاربری
+            </td>
+
+            <td class="thead">
+                رمز عبور
+            </td>
+
+            <td class="thead">
+                ایمیل
+            </td>
+
+            <td class="thead">
+                شماره تلفن
+            </td>
+
+            <td class="thead">
+                ایمیل
+            </td>
+
+            <td class="thead">
+                جنسیت
+            </td>
+
+            <td class="thead">
+                زمان ثبت نام
+            </td>
+        </tr>
+    </thead>
+
+    {% for x in data %}
+
+    <tr>
+        {% for i in x %}
+
+            {% if not x.8 == i %}
+
+                <td class="{{ x.8 }}">
+                    <a href="/profile/{{ x.1 }}/" >{{ i }}</a>
+                </td>
+
+            {% endif %}
+
+        {% endfor %}
+    </tr>
+
+    {% endfor %}
+
+
+</table>
+
+{% endblock %}

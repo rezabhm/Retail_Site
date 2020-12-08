@@ -1,0 +1,210 @@
+{% extends 'retail_app1/index.html' %}
+
+
+
+{% block style %}
+
+    table.comment {
+
+    border-bottom-style : solid;
+    border-bottom-color : rgb(200 , 200 , 200);
+    margin-bottom : 10px;
+
+    }
+
+    td.comment {
+
+    mrgin-right : 10% ;
+    padding : 20px ;
+    }
+
+    #user_comment {
+
+    width:40px;
+    height:40px;
+    border-style :solid;
+    border-color : white;
+    border-radius : 40px;
+    position:relative;
+    top: 5px;
+
+    }
+
+{% endblock%}
+
+{% block main %}
+
+
+{% for x in data %}
+
+        <div style="margin-right : 50px; font-size : 24; ">
+            {% load static %}
+            <img src="{% static 'media/1.jfif' %}" style="width : 30px ; height:30px ; border-radius : 30px ;position:relative ; top :5px;"/>
+
+            <a style="position : relative ; bottom:5px;">{{ x.0 }}</a>
+        </div>
+
+        <p class="line line_table" ></p>
+
+        <div>
+
+
+            {% for i in x.1 %}
+                <form method="post" action="{% url 'order' %}">
+
+                    {% csrf_token %}
+
+                    <table class="product">
+
+                        <tr>
+                            <td>
+
+                            {% load static %}
+                            <img src="{% static i.0 %}" class="product_image"/>
+
+                            </td>
+
+                            <td >
+                                توضیحات :
+                                <br>
+
+                                {{ i.5 }}
+
+                            </td>
+
+                            <td>
+
+                            {% load static %}
+                            <img src="{% static i.6 %}" width="250" height="300"/>
+
+                            </td>
+
+                            <td>
+
+                            {% load static %}
+                            <img src="{% static i.7 %}" width="250" height="300"/>
+
+                            </td>
+
+                            <td>
+
+                            {% load static %}
+                            <img src="{% static i.8 %}" width="250" height="300"/>
+
+                            </td>
+
+
+
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                            <!-- name -->
+                            {{ i.1 }}
+                            </td>
+
+                            <td>
+                            <!-- off price -->
+                            {{ i.3 }}
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td>
+                            <!-- total number -->
+                                <input type="number" name="total" value="1">
+                            </td>
+
+                            <td style="text-decoration : line-through;">
+                            <!-- price -->
+                                {{ i.4 }}
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td colspan="2">
+                                <input type="submit">
+                            </td>
+
+                        </tr>
+
+
+                    </table>
+
+                    <p style="width : 100% ; height:2px ; background-color: rgb(240 , 240 , 240);" ></p>
+
+                    <input type="hidden" name="information" value= "{{ i.9 }}" >
+
+                </form>
+
+            {% endfor %}
+
+        </div>
+{% endfor %}
+
+<div class="comment">
+
+    <p style="text-weight:bold; margin-right:5%; text-size:24px; height:2px;">
+        نظرات
+    </p>
+
+    <p class="line" style="background-color : black; ">
+
+    </p>
+
+
+    {% for x in cmnt %}
+        <table class="comment">
+
+            <tr>
+
+                <td clas="comment" >
+
+                    {% load static %}
+                    <img src="{% static 'media/1.jfif' %}" id="user_comment" >
+                    <p style="padding-bottom : 5px; display:inline; margin:10px;">
+                    {{ x.0 }}
+                    </p>
+                </td>
+
+                <td class="comment" style="text-direction:rtl; width:50%;">
+                    {{ x.1 }}
+                </td>
+
+
+            </tr>
+
+        </table>
+    {% endfor %}
+</div>
+
+<br>
+
+
+<form method="get" action="{% url 'comment' %}">
+
+    <table class="comment" style="border-style : none;">
+
+        <td class="comment">
+            نظر شما :
+        </td>
+
+        <td class="comment">
+            <input type="text" name="comment">
+        </td>
+
+        <td class="comment">
+            <input type="submit" value="ارسال">
+        </td>
+
+        <input type="hidden" name="username" value="{{ username }}" >
+        <input type="hidden" name="product" value="{{ product_id }}">
+
+    </table>
+
+</form>
+
+{% endblock %}
